@@ -21,7 +21,16 @@ function App() {
   }
 
   async function handleAddRepository() {
-    // TODO
+    const aTime = Date.now();
+    const aNewRepository = {
+      url: `http://github.com/atotallynewrepo${aTime}`,
+      title: `A Totally new repository ${aTime}`,
+      techs: ['Nodejs', 'React', 'React Native']
+    };
+
+    const persistedNewRepo = await api.post('repositories', aNewRepository);
+
+    setRepositories([...repositories, persistedNewRepo.data]);
   }
 
   async function handleRemoveRepository(id) {
